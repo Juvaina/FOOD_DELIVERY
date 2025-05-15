@@ -6,30 +6,38 @@ import cartRouter from './routes/cartRoute.js';
 import foodRouter from './routes/foodRoute.js';
 import orderRouter from './routes/orderRoute.js';
 import userRouter from './routes/userRoute.js';
+
 dotenv.config();
 
-//app config
+// App config
 const app = express();
 const port = process.env.PORT || 4000;
 
-//middleware
+// Middleware
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: 'https://food-delivery-bss9.vercel.app', // Frontend domain
+    credentials: true // Optional, only if you're using cookies or auth headers
+  })
+);
 
-//db connection
+// DB connection
 connectDB();
 
-//api endpoints
+// API endpoints
 app.use('/api/food', foodRouter);
 app.use('/images', express.static('uploads'));
 app.use('/api/user', userRouter);
 app.use('/api/cart', cartRouter);
 app.use('/api/order', orderRouter);
 
+// Test route
 app.get('/', (req, res) => {
   res.send('API Working');
 });
 
+// Start server
 app.listen(port, () => {
-  console.log(`Server Started on http://localhost:${port}`);
+  console.log(`Server started on http://localhost:${port}`);
 });
