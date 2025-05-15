@@ -6,8 +6,7 @@ export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
-  const url = import.meta.env.VITE_BACKEND_URL;
-  console.log('url: ', url);
+  const url = 'http://localhost:4000';
   const [token, setToken] = useState('');
   const [userName, setUserName] = useState('');
   const [food_list, setFoodList] = useState([]);
@@ -77,14 +76,12 @@ const StoreContextProvider = (props) => {
       }
     }
     loadData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (token) {
       loadCartData(token);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   const contextValue = {
