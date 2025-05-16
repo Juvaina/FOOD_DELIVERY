@@ -10,7 +10,7 @@ import PlaceOrder from './pages/Client/PlaceOrder/PlaceOrder';
 import Verify from './pages/Client/Verify/Verify';
 
 const App = () => {
-  const url = 'http://localhost:4000';
+  const url = import.meta.env.VITE_BACKEND_URL;
   return (
     <Routes>
       {/* Client Layout */}
